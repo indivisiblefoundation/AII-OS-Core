@@ -2,7 +2,7 @@ version: "3.9"
 services:
   dna-framework:
     build:./dna-framework
-    healthcheck: { test: ["CMD", "curl", "-f", "http://localhost:8080/health"], interval: 5s, retries: 3 }
+    healthcheck: { test: ["http://localhost:8080/health"], interval: 5s, retries: 3 }
     ports: ["8080:8080"]
   architecture-engine:
     build:./architecture-engine
