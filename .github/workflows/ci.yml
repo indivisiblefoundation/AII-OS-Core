@@ -1,0 +1,15 @@
+name: DNA Triple Check
+on: [push]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cargo test --workspace
+      - run: python -m pytest flywheel-engine/
+      - name: Check 1 - DNA Presence
+        run: grep -r "dna::check()" --include="*.rs".
+      - name: Check 2 - Interdependence
+        run: docker-compose config | grep -q "service_healthy"
+      - name: Check 3 - Agent Isolation
+        run: grep -r "dna_bus" --include="*.rs" --include="*.py".
