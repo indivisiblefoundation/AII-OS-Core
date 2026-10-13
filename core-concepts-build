@@ -1,0 +1,12 @@
+AII-OS-Core/
+├── dna-framework/src/
+│   ├── audit.rs (WORM), trust.rs (Fuel cap), compliance.rs (rubric), glue.rs (NATS), dna_agent.rs, lib.rs (A-T-C-G)
+│   └── protocol/ A-T-C-G.proto
+├── architecture-engine/
+│   ├── src/lib.rs + agent/border_agent.rs
+│   └── main.rs -> dna::check() first line
+├── kinetic-engine/agent/motion_agent.rs (WASI-NN)
+├── guerillanet-p2p/agent/swarm_agent.rs (RL)
+├── flywheel-engine/agent/recall_agent.rs (CLIP+reward)
+├── mainframe-core/agent/orchestrator_agent.rs
+└── docker-compose.yml (dna-framework healthcheck = required for all)
