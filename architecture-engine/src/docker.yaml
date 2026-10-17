@@ -1,3 +1,4 @@
 build:
   context: .              # SPACE after colon
   dockerfile: ./path/Dockerfile  # SPACE after colon
+COPY ..  # not COPY..
