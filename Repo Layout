@@ -1,0 +1,13 @@
+AII-OS-Core/
+├── Cargo.toml                 # workspace: dna, guerilla, mainframe
+├── docker-compose.yml
+├── dna-framework/             # wasmtime = "22"
+│   ├── Cargo.toml
+│   ├── Dockerfile
+│   └── src/{main.rs, lib.rs, bin/}
+├── guerillanet-p2p/
+├── mainframe-core/
+├── architecture-engine/       # Python, NOT Rust
+│   ├── Dockerfile
+│   └── main.py
+└── README.md
