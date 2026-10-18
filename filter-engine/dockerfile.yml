@@ -1,0 +1,9 @@
+FROM rust:latest AS builder
+WORKDIR /app
+COPY . .
+RUN cargo build -p filter-engine --release
+
+FROM debian:bookworm-slim
+COPY --from=builder /app/target/release/ /tmp/r/
+RUN cp /tmp/r/filter-engine /usr/local/bin/filter-engine 2>/dev/null || cp /tmp/r/filter_engine /usr/local/bin/filter-engine 2>/dev/null || echo "filter-engine is lib, skipping binary"
+CMD ["sleep", "infinity"]
