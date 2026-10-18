@@ -18,3 +18,22 @@ Like human DNA, 4 bases = 4 protocols in every cell:
 7.  **Mainframe (Heart)** + `OrchestratorAgent` — `dna-framework:8080`, pumps blood
 **Interdependence: Circular.** DNA needs organs for data, organs need DNA + Brain to start. Enforced via docker healthcheck + `depends_on: service_healthy`.
 ### Runtime
+Producers -> raw.> -> [RAW: 100k msgs] -> filter-engine (Dedupe/RateLimit/PII) -> filtered.> -> [FILTERED] -> brain-engine -> qdrant / mainframe
+^ ^ ^
+NATS:4222 + 8222 (-js) Brain is gatekeeper here dna::check()
+
+**brain-engine today:**
+```rust
+get_or_create_stream(RAW: raw.>, FILTERED: filtered.>)
+create_consumer(durable: brain)
+loop { msg = fetch().await; dna::check(); reason(); ack() }
+Quick Start
+Bash
+sudo docker compose up -d nats qdrant
+sudo docker compose up --build -d brain-engine dna-framework
+sudo docker compose logs -f brain-engine
+# BRAIN ENGINE running - waiting for messages
+Stack: Rust 1.85+ (edition2024), async-nats 0.34 (no jetstream feature), docker compose v2.
+
+Indivisible Foundation — Border + Motion x 100 x Brain ^ Recall
+MD
