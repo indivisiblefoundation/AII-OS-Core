@@ -1,0 +1,16 @@
+raw.sensors.*  -> Buffer Filter -> Dedupe Filter -> PII Filter -> filtered.input.*
+raw.p2p.*      -> Rate Limit    -> Semantic Filter
+raw.agents.*   -> Sanitize
+                                      |
+                                      v
+                              +-----------------+
+                              |  BRAIN ENGINE   |  Rust + Tokio + NATS JetStream
+                              |  - Registry     |  Holds all engines as WASM strands
+                              |  - Scheduler    |  Decides who runs when
+                              |  - Bus          |  JetStream = buffer + replay
+                              |  - Health       |  Restarts dead engines
+                              +-----------------+
+                                      |
+         +------------------+------------------+------------------+
+         |                  |                  |                  |
+   dna-framework    architecture-engine  guerillanet-p2p    mainframe-core
