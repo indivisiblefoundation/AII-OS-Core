@@ -1,0 +1,2 @@
+raw.sensors.camera -> dedupe -> rate_limit(10/sec) -> filtered.sensors.camera
+raw.p2p.peer.*     -> buffer(1000) -> pii_scrub -> filtered.p2p.*
